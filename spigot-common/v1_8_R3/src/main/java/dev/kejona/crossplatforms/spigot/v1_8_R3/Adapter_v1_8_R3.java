@@ -26,7 +26,8 @@ public class Adapter_v1_8_R3 implements SpigotAdapter {
 
     @Override
     public void setCustomModelData(@Nonnull ItemStack stack, @Nullable Integer value) {
-        throw new UnsupportedOperationException("CustomModelData only supported on 1.14.4 and above. Current version is " + Bukkit.getVersion());
+        throw new UnsupportedOperationException(
+                "CustomModelData only supported on 1.14.4 and above. Current version is " + Bukkit.getVersion());
     }
 
     @Override
@@ -45,11 +46,18 @@ public class Adapter_v1_8_R3 implements SpigotAdapter {
             return;
         }
 
-        // note: providing name and textures but not uuid seems to be invalid according to the server
+        // note: providing name and textures but not uuid seems to be invalid according
+        // to the server
         GameProfile profile = new GameProfile(UUID.randomUUID(), name);
         profile.getProperties().put("textures", new Property("textures", textures));
 
-        ReflectionUtils.setValue(meta, ClassNames.META_SKULL_PROFILE, profile);
+        if (ClassNames.META_SKULL_PROFILE != null) {
+            ReflectionUtils.setValue(meta, ClassNames.META_SKULL_PROFILE, profile);
+        } else {
+            // If we can't set skull profile, the skull texture won't work but the plugin
+            // won't crash
+            System.out.println("Warning: Cannot set skull profile - META_SKULL_PROFILE field not available");
+        }
     }
 
     @Override
