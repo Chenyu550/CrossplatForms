@@ -52,10 +52,17 @@ public class SpigotPlayer implements FormPlayer {
     @Nullable
     @Override
     public String getEncodedSkinData() {
+        if (ClassNames.PLAYER_GET_PROFILE == null) {
+            // If we can't get the profile method, return null (skin won't work but plugin
+            // won't crash)
+            return null;
+        }
+
         GameProfile profile = ReflectionUtils.castedInvoke(handle, ClassNames.PLAYER_GET_PROFILE);
         Objects.requireNonNull(profile, "game profile");
 
-        // Need to be careful here - getProperties() returns an authlib PropertyMap, which extends
+        // Need to be careful here - getProperties() returns an authlib PropertyMap,
+        // which extends
         // MultiMap from Guava. On spigot-legacy, Guava is shaded and relocated.
         for (Property textures : profile.getProperties().get("textures")) {
             String value = ADAPTER.propertyValue(textures);
@@ -74,7 +81,8 @@ public class SpigotPlayer implements FormPlayer {
 
     @Override
     public boolean switchBackendServer(String server) {
-        try (ByteArrayOutputStream stream = new ByteArrayOutputStream(); DataOutputStream out = new DataOutputStream(stream)) {
+        try (ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                DataOutputStream out = new DataOutputStream(stream)) {
             out.writeUTF("Connect");
             out.writeUTF(server);
             handle.sendPluginMessage(PLUGIN, "BungeeCord", stream.toByteArray());
