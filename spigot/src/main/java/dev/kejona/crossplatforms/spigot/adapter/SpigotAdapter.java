@@ -2,7 +2,7 @@ package dev.kejona.crossplatforms.spigot.adapter;
 
 import com.mojang.authlib.properties.Property;
 import dev.kejona.crossplatforms.handler.FormPlayer;
-import dev.kejona.crossplatforms.spigot.SpigotAccessItems;
+import dev.kejona.crossplatforms.spigot.pdc.PDCAccessor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -27,7 +27,7 @@ public interface SpigotAdapter {
         setSkullProfile(meta, player.getName(), player.getEncodedSkinData());
     }
 
-    PDCAccessor nbtAccessor(Plugin plugin);
+    PDCAccessor pdcAccessor(Plugin plugin);
 
     String propertyValue(Property property);
 }

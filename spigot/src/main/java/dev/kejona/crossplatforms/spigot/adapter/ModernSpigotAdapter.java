@@ -1,8 +1,8 @@
 package dev.kejona.crossplatforms.spigot.adapter;
 
 import com.mojang.authlib.properties.Property;
-import dev.kejona.crossplatforms.spigot.SpigotAccessItems;
-import dev.kejona.crossplatforms.spigot.nbt.ModernPDCAccessor;
+import dev.kejona.crossplatforms.spigot.pdc.ModernPDCAccessor;
+import dev.kejona.crossplatforms.spigot.pdc.PDCAccessor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -85,7 +85,7 @@ public class ModernSpigotAdapter implements SpigotAdapter {
     }
 
     @Override
-    public PDCAccessor nbtAccessor(Plugin plugin) {
+    public PDCAccessor pdcAccessor(Plugin plugin) {
         return new ModernPDCAccessor(plugin);
     }
 

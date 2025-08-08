@@ -1,4 +1,4 @@
-package dev.kejona.crossplatforms.spigot.adapter;
+package dev.kejona.crossplatforms.spigot.pdc;
 
 import org.bukkit.inventory.ItemStack;
 

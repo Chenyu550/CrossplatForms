@@ -39,17 +39,17 @@ public class SpigotInventoryFactory implements InventoryFactory {
     @Override
     public InventoryHandle chest(String title, int chestSize) {
         Inventory inventory = Bukkit.createInventory(null, chestSize, title);
-        return new SpigotInventory(inventory, title); // ✅ title toegevoegd
+        return new SpigotInventory(inventory, title);
     }
 
     @Override
     public InventoryHandle inventory(String title, InventoryLayout layout) {
         if (layout == InventoryLayout.CHEST) {
-            return chest(title, MAX_CHEST_SIZE); // ✅ al correct
+            return chest(title, MAX_CHEST_SIZE);
         }
 
         Inventory inventory = Bukkit.createInventory(null, convertType(layout), title);
-        return new SpigotInventory(inventory, title); // ✅ title toegevoegd
+        return new SpigotInventory(inventory, title);
     }
 
 

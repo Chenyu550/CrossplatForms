@@ -11,7 +11,7 @@ import dev.kejona.crossplatforms.inventory.ItemHandle;
 import dev.kejona.crossplatforms.permission.Permissions;
 import dev.kejona.crossplatforms.resolver.PlayerResolver;
 import dev.kejona.crossplatforms.resolver.Resolver;
-import dev.kejona.crossplatforms.spigot.adapter.PDCAccessor;
+import dev.kejona.crossplatforms.spigot.pdc.PDCAccessor;
 import dev.kejona.crossplatforms.spigot.adapter.SpigotAdapter;
 import dev.kejona.crossplatforms.spigot.handler.SpigotPlayer;
 import lombok.AllArgsConstructor;
@@ -45,7 +45,7 @@ public final class SpigotAccessItems extends AccessItemRegistry implements Liste
 
     private final Logger logger = Logger.get();
 
-    private final PDCAccessor nbt;
+    private final PDCAccessor pdc;
     private final BedrockHandler bedrockHandler;
     private final Placeholders placeholders;
 
@@ -56,13 +56,13 @@ public final class SpigotAccessItems extends AccessItemRegistry implements Liste
                              BedrockHandler bedrockHandler,
                              Placeholders placeholders) {
         super(configManager, permissions);
-        this.nbt = adapter.nbtAccessor(plugin);
+        this.pdc = adapter.pdcAccessor(plugin);
         this.bedrockHandler = bedrockHandler;
         this.placeholders = placeholders;
     }
 
     public void setItemId(@Nonnull ItemStack itemStack, @Nonnull String identifier) {
-        nbt.setCustomString(itemStack, AccessItem.STATIC_IDENTIFIER, identifier);
+        pdc.setCustomString(itemStack, AccessItem.STATIC_IDENTIFIER, identifier);
     }
 
     /**
@@ -73,7 +73,7 @@ public final class SpigotAccessItems extends AccessItemRegistry implements Liste
      */
     @Nullable
     public String getItemId(@Nonnull ItemStack itemStack) {
-        return nbt.getCustomString(itemStack, AccessItem.STATIC_IDENTIFIER);
+        return pdc.getCustomString(itemStack, AccessItem.STATIC_IDENTIFIER);
     }
 
     public ItemStack createItemStack(AccessItem accessItem, Player player) {

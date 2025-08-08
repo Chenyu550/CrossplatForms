@@ -49,14 +49,12 @@ public class BungeeCordPlayer implements FormPlayer {
         }
 
         try {
-            // Probeer getLoginProfile() methode te vinden op de concrete PendingConnection klasse
             Method getLoginProfileMethod = connection.getClass().getMethod("getLoginProfile");
             Object loginProfile = getLoginProfileMethod.invoke(connection);
             if (loginProfile == null) {
                 return null;
             }
 
-            // loginProfile heeft een methode getProperties() die een Collection<Property> teruggeeft
             Method getPropertiesMethod = loginProfile.getClass().getMethod("getProperties");
             Object propertiesObj = getPropertiesMethod.invoke(loginProfile);
             if (!(propertiesObj instanceof Iterable<?>)) {
@@ -65,7 +63,6 @@ public class BungeeCordPlayer implements FormPlayer {
 
             Iterable<?> properties = (Iterable<?>) propertiesObj;
 
-            // Doorloop properties om "textures" property te vinden
             for (Object propObj : properties) {
                 if (!(propObj instanceof Property)) {
                     continue;

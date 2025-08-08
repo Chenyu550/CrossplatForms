@@ -1,6 +1,5 @@
-package dev.kejona.crossplatforms.spigot.nbt;
+package dev.kejona.crossplatforms.spigot.pdc;
 
-import dev.kejona.crossplatforms.spigot.adapter.PDCAccessor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
