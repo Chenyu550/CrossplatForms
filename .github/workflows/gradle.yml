@@ -36,9 +36,10 @@ jobs:
       uses: actions/upload-artifact@v7.0.1
       with:
         # Artifact name. If the `archive` input is `false`, the name of the file uploaded will be the artifact name.
-        name: crossplatforms # optional, default is artifact
-        # A file, directory or wildcard pattern that describes what to upload.
-        path: |
-          build/libs/*.jar
-          !build/libs/*-plain.jar
+          name: CrossplatForms
+          path: |
+            spigot/build/libs/CrossplatForms-Spigot.jar
+            spigot-legacy/build/libs/CrossplatForms-SpigotLegacy.jar
+            bungeecord/build/libs/CrossplatForms-BungeeCord.jar
+            velocity/build/libs/CrossplatForms-Velocity.jar
 
